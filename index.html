@@ -8,7 +8,7 @@
     <!-- Підключаємо шрифт Inter з Google Fonts -->
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Manrope:wght@700;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;600&display=swap" rel="stylesheet">
 
     <style>
          @import url('https://googleapis.com');
@@ -21,6 +21,8 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh; 
+             overflow: hidden; /* Ховаємо смуги прокручування для правильного вильоту сердечок */
+            position: relative;
         }
 
         .container {
@@ -39,7 +41,7 @@
         /* Заголовок H1 над таймером */
         h1 {
             font-size: 24px;
-            font-weight: 700; /* Товщина Inter 700 */
+            font-weight: 700; /* Товщина Manrope 700 */
             color: #333333; /* Темно-сірий колір */
             margin: 0 0 15px 0;
         }
@@ -47,7 +49,6 @@
         /* Налаштування вигляду таймера */
         .timer-display {
             font-size: 32px; /* Збільшили розмір самих цифр */
-            font-family: 'Inter', sans-serif !important;
             font-weight: 600 !important; 
             color: #9B0116; 
             letter-spacing: 0.5px;
@@ -68,7 +69,7 @@
 
         /* Ефект погойдування плашки при наведенні (спочатку один край, потім інший) */
         .timer-display:hover {
-            animation: wobble-box 0.6s ease-in-out forwards;
+            animation: wobble-box 0.6s ease-in-out forwards; 
         }
 
         @keyframes wobble-box {
@@ -76,6 +77,30 @@
             30% { transform: rotate(3deg); }   /* Нахил в один бік */
             70% { transform: rotate(-2deg); } /* Потім нахил в інший бік */
             100% { transform: rotate(0deg); }  /* Повернення до центру */
+        }
+        .heart {
+            position: absolute;
+            bottom: -50px; 
+            color: #9B0116; 
+            font-size: 24px;
+            user-select: none;
+            pointer-events: none;
+            animation: flyAndFade 4s linear forwards;
+        }
+        
+       @keyframes flyAndFade {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 0.9; 
+            }
+            50% {
+                transform: translateY(-50vh) translateX(40px) rotate(25deg);
+                opacity: 0.5; 
+            }
+            100% {
+                transform: translateY(-105vh) translateX(-40px) rotate(-25deg);
+                opacity: 0; 
+            }
         }
     </style>
 </head>
@@ -93,7 +118,7 @@
 
     <script>
         // Дата: 6 вересня 2021 року, 18:05:06
-        const startDate = new Date(Date.UTC(2021, 8, 6, 18, 5, 6)); 
+        const startDate = new Date(Date.UTC(2021, 8, 6, 18, 56, 0)); 
         
          function getPluralWord(number, one, two, many) {
             let n = Math.abs(number);
@@ -159,32 +184,26 @@
         updateTimer();
         setInterval(updateTimer, 1000); 
 
-  function createHearts() {
+ function createHearts() { 
             const numberOfHearts = 45; 
-            
-            for (let i = 0; i < numberOfHearts; i++) {
-                setTimeout(() => {
-                    const heart = document.createElement('div');
-                    heart.className = 'heart';
-                    heart.innerHTML = '❤️'; 
-                    
-                    heart.style.left = Math.random() * 100 + 'vw';
-                    
+            for (let i = 0; i < numberOfHearts; i++) { 
+                setTimeout(() => { 
+                    const heart = document.createElement('div'); 
+                    heart.className = 'heart'; 
+                    heart.innerHTML = '❤️'; /* Виправлено зламаний символ */
+                    heart.style.left = Math.random() * 100 + 'vw'; 
                     const size = Math.random() * 20 + 15; 
-                    heart.style.fontSize = size + 'px';
-                    
+                    heart.style.fontSize = size + 'px'; 
                     const duration = Math.random() * 2 + 3; 
-                    heart.style.animationDuration = duration + 's';
+                    heart.style.animationDuration = duration + 's'; 
+                    document.body.appendChild(heart); 
                     
-                    document.body.appendChild(heart);
-                    
-                    setTimeout(() => {
-                        heart.remove();
-                    }, duration * 1000);
-                    
+                    setTimeout(() => { 
+                        heart.remove(); 
+                    }, duration * 1000); 
                 }, i * 120); 
-            }
-        }
+            } 
+        } 
         window.addEventListener('DOMContentLoaded', createHearts);
         
     </script>
