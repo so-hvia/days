@@ -62,21 +62,12 @@
             margin: 0 auto; 
             background: #ffffff; 
             border-radius: 0 0 12px 12px; 
-            display: inline-flex !important;
-            justify-content: center;
-            align-items: baseline;
-            flex-wrap: wrap; /* Якщо екран смартфона малий, блоки акуратно перенесуться */
+            display: inline-block; 
             transition: transform 0.4s ease; 
             cursor: default; 
             font-variant-numeric: tabular-nums; 
         } 
 
-           /* Задаємо кожному блоку (цифра + слово) фіксовану ширину, щоб нічого не здригалося */
-        .timer-item {
-            display: inline-block;
-            width: 140px; /* Завдяки цьому простір для слів зафіксовано */
-            text-align: center; /* Центруємо текст всередині кожного блоку */
-        }
 
         .timer-display span { 
             font-size: 24px; 
@@ -181,12 +172,13 @@
 
            // Обертаємо кожну пару (цифра + слово) в контейнер <div class="timer-item">
             document.getElementById('timer').innerHTML = 
-                `<div class="timer-item">${years}<span> ${txtYears}</span></div>` + 
-                `<div class="timer-item">${months}<span> ${txtMonths}</span></div>` + 
-                `<div class="timer-item">${days}<span> ${txtDays}</span></div>` + 
-                `<div class="timer-item">${hours}<span> ${txtHours}</span></div>` + 
-                `<div class="timer-item">${minutes}<span> ${txtMinutes}</span></div>` + 
-                `<div class="timer-item">${seconds}<span> ${txtSeconds}</span></div>`;
+                `${years}<span> ${txtYears}</span> ` + 
+                `${months}<span> ${txtMonths}</span> ` + 
+                `${days}<span> ${txtDays}</span> ` + 
+                `${hours}<span> ${txtHours}</span> ` + 
+                `${minutes}<span> ${txtMinutes}</span> ` + 
+                `${seconds}<span> ${txtSeconds}</span>`; 
+        } 
 
         updateTimer(); 
         setInterval(updateTimer, 1000); 
