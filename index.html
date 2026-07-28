@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <title>Скільки днів я люблю Сашулю</title> 
 
-    <!-- Надійне підключення шрифту Manrope з Google Fonts --> 
+    <!-- Завантажуємо Manrope з альтернативним надійним методом --> 
     <link rel="preconnect" href="https://googleapis.com"> 
     <link rel="preconnect" href="https://gstatic.com" crossorigin> 
     <link href="https://googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet"> 
@@ -40,7 +40,6 @@
             margin: 0 auto 20px auto; 
         } 
 
-        /* Заголовок H1 з білою плашкою */ 
         h1 { 
             font-size: 32px; 
             font-weight: 500 !important; 
@@ -52,7 +51,6 @@
             display: inline-block; 
         } 
 
-        /* Налаштування вигляду таймера */ 
         .timer-display { 
             font-size: 36px; 
             font-weight: 600 !important; 
@@ -75,7 +73,6 @@
             margin-right: 8px; 
         } 
 
-        /* Стилі для анімації поцілунків */ 
         .heart { 
             position: absolute; 
             bottom: -80px; 
@@ -89,17 +86,9 @@
             display: block; 
         } 
 
-        .fly-straight {
-            animation: straightMove 5s linear forwards;
-        }
-
-        .fly-left {
-            animation: leftMove 5s linear forwards;
-        }
-
-        .fly-right {
-            animation: rightMove 5s linear forwards;
-        } 
+        .fly-straight { animation: straightMove 5s linear forwards; } 
+        .fly-left { animation: leftMove 5s linear forwards; } 
+        .fly-right { animation: rightMove 5s linear forwards; } 
 
         @keyframes straightMove { 
             0% { transform: translateY(0) rotate(0deg); opacity: 0.9; } 
@@ -192,38 +181,19 @@
             const kiss = document.createElement('div'); 
             
             const trajectoryType = Math.floor(Math.random() * 3); 
-            if (trajectoryType === 0) {
-                kiss.className = 'heart fly-straight';
-            } else if (trajectoryType === 1) {
-                kiss.className = 'heart fly-left';
-            } else {
-                kiss.className = 'heart fly-right';
-            }
+            if (trajectoryType === 0) { kiss.className = 'heart fly-straight'; } 
+            else if (trajectoryType === 1) { kiss.className = 'heart fly-left'; } 
+            else { kiss.className = 'heart fly-right'; } 
             
-            const now = new Date(); 
             let currentImg = ""; 
+            const randomChoice = Math.random(); 
             
-            // ТИМЧАСОВА ПЕРЕВІРКА НА СЬОГОДНІ (28 липня)
-            const isAnniversaryDay = (now.getMonth() === 6 && now.getDate() === 28); 
+            // Тестово крутимо ТІЛЬКИ річницю
+            if (randomChoice < 0.33) { currentImg = "anniversary1.png"; } 
+            else if (randomChoice < 0.66) { currentImg = "anniversary2.png"; } 
+            else { currentImg = "anniversary3.png"; } 
             
-            if (isAnniversaryDay) { 
-                const randomChoice = Math.random(); 
-                if (randomChoice < 0.33) { 
-                    currentImg = "anniversary1.png"; 
-                } else if (randomChoice < 0.66) { 
-                    currentImg = "confetti.png"; 
-                } else { 
-                    currentImg = "balloon-hearts.png"; 
-                } 
-            } else { 
-                if (Math.random() < 0.5) { 
-                    currentImg = "kiss.png"; 
-                } else { 
-                    currentImg = "cat.png"; 
-                } 
-            } 
-            
-            kiss.innerHTML = `<img src="${currentImg}" alt="kiss">`; 
+            kiss.innerHTML = `<img src="${currentImg}" alt="anniversary">`; 
             kiss.style.left = (Math.random() * 96 + 2) + 'vw'; 
             
             const size = Math.random() * 30 + 35; 
@@ -234,17 +204,12 @@
 
             document.body.appendChild(kiss); 
             
-            setTimeout(() => { 
-                kiss.remove(); 
-            }, duration * 1000); 
+            setTimeout(() => { kiss.remove(); }, duration * 1000); 
         } 
 
         window.addEventListener('DOMContentLoaded', () => { 
-            const now = new Date(); 
-            const isAnniversaryDay = (now.getMonth() === 6 && now.getDate() === 28); 
-            
-            let spawnSpeed = isAnniversaryDay ? 80 : 150; 
-            setInterval(spawnKiss, spawnSpeed); 
+            // Швидкість 80мс для тесту
+            setInterval(spawnKiss, 80); 
         }); 
     </script> 
 </body> 
