@@ -134,82 +134,61 @@
             100% { transform: translateY(-115vh) translateX(15vw) rotate(35deg); opacity: 0; } 
         } 
 
-        /* === НАЛАШТУВАННЯ ДЛЯ МОБІЛЬНИХ ТЕЛЕФОНІВ (екран менше 768px) === */
-       /* === НАЛАШТУВАННЯ ДЛЯ МОБІЛЬНИХ ТЕЛЕФОНІВ === */
+        /* === НАЛАШТУВАННЯ ДЛЯ МОБІЛЬНИХ ТЕЛЕФОНІВ === */
         @media (max-width: 768px) {
-            html, body {
-                display: block !important; 
+            body {
+                align-items: flex-start !important; 
+                padding-top: 50px !important; 
+                padding-bottom: 50px !important;
                 overflow-x: hidden !important; 
                 overflow-y: auto !important;   
                 height: auto !important;
-                min-height: 100vh;
-                /* Робить скрол на смартфонах м'яким та плавним без заїдань */
-                -webkit-overflow-scrolling: touch; 
             }
-
-            body {
-                padding-top: 50px; /* ЗБІЛЬШЕНО: Великий відступ згори для фото */
-                padding-bottom: 60px;
-                background-color: #ffffff !important;
-            }
-
             .container { 
-                display: block !important;
-                text-align: center !important;
-                padding: 10px;
-                width: 100%;
-                box-sizing: border-box;
-                margin: 0 auto;
+                padding: 10px !important;
+                width: 100% !important;
             }
-
             .center-image { 
-                max-width: 260px; 
-                margin: 0 auto 25px auto; /* Центруємо фото та робимо відступ знизу */
+                max-width: 260px !important; 
+                margin-bottom: 25px !important; 
             } 
-
             h1 { 
-                font-size: 24px; 
-                text-align: center;
-                background: #ffffff !important; /* Примусово біле тло */
-                padding: 12px 20px;
-                margin: 0 auto 15px auto; 
-                border-radius: 12px; 
-                display: inline-block;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+                font-size: 24px !important; 
+                text-align: center !important;
+                background: #ffffff !important; 
+                padding: 12px 20px !important;
+                margin: 0 auto 15px auto !important; 
+                border-radius: 12px !important; 
+                display: inline-block !important;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.02) !important;
             } 
-
             .timer-display { 
                 flex-direction: column !important; 
-                background: transparent !important; /* Прозорий загальний контейнер */
-                padding: 0;
-                width: 100%;
-                align-items: center;
+                background: transparent !important; 
+                padding: 0 !important;
+                width: 100% !important;
+                align-items: center !important;
                 display: flex !important; 
             } 
-
-            /* ПОВЕРНУТО: Окремі білі плашки для часу */
             .timer-item {
-                background: #ffffff !important; /* Примусово повертаємо біле тло */
+                background: #ffffff !important; 
                 border-radius: 12px !important;  
                 padding: 12px 20px !important;   
                 width: 220px !important;         
-                margin: 10px auto !important; /* Збільшений відступ між плашками */
-                box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important; /* Легка гарна тінь */
+                margin: 10px auto !important; 
+                box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important; 
                 display: flex !important;
                 flex-direction: column !important;
-                box-sizing: border-box;
+                box-sizing: border-box !important;
             }
-
-            .timer-num {
-                font-size: 32px;
-            }
-            .timer-word {
-                font-size: 18px;
-            }
+            .timer-num { font-size: 32px !important; }
+            .timer-word { font-size: 18px !important; }
         }
     </style> 
 </head> 
 <body> 
+    <!-- Шар для безперешкодного польоту картинок -->
+    <div id="animation-container" style="position:fixed; top:0; left:0; width:100vw; height:100vh; overflow:hidden; z-index:1; pointer-events:none;"></div>
 
     <div class="container"> 
         <img src="photo.png" alt="Головне зображення" class="center-image"> 
@@ -312,7 +291,9 @@
             const duration = Math.random() * 2 + 4; 
             kiss.style.animationDuration = duration + 's'; 
 
-            document.body.appendChild(kiss); 
+           // Додаємо поцілунки в окремий шар, щоб сторінка не стрибала при скролі
+            document.getElementById('animation-container').appendChild(kiss);
+
             
             setTimeout(() => { kiss.remove(); }, duration * 1000); 
         } 
