@@ -9,39 +9,34 @@
         body {
             margin: 0;
             padding: 0;
-            background-color: #f0f2f5; /* Колір фону сайту */
+            background-color: #ffffff; /* Чисто біле тло */
             font-family: Arial, sans-serif;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            min-height: 100vh; /* Розвертає вміст на всю висоту екрана */
         }
 
         .container {
-            text-align: center;
+            text-align: center; /* Центрує картинку та текст всередині */
             padding: 20px;
         }
 
         /* Налаштування картинки посередині */
-        .center-image {
-            max-width: 300px; /* Максимальна ширина картинки */
+       .center-image {
+            max-width: 400px; /* Максимальна ширина картинки */
             width: 100%;
             height: auto;
-            border-radius: 10px; /* Закруглені кути для краси */
-            margin-bottom: 20px;
+            display: block;
+            margin: 0 auto 30px auto; /* Центрує картинку та робить відступ знизу */
         }
 
         /* Налаштування вигляду таймера */
         .timer-display {
-            font-size: 24px;
+            font-size: 28px; /* Розмір шрифту */
             font-weight: bold;
-            color: #333;
-            background: white;
-            padding: 15px 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            display: inline-block;
+            color: #9B0116; /* Червоний колір для цифр */
+            letter-spacing: 0.5px;
         }
     </style>
 </head>
@@ -77,8 +72,10 @@
             let days = now.getDate() - startDate.getDate();
             let hours = now.getHours() - startDate.getHours();
             let minutes = now.getMinutes() - startDate.getMinutes();
+            let seconds = now.getSeconds() - startDate.getSeconds();
 
             // Коригування негативних значень через різну кількість днів у місяцях
+             if (seconds < 0) { seconds += 60; minutes--; }
             if (minutes < 0) { minutes += 60; hours--; }
             if (hours < 0) { hours += 24; days--; }
             if (days < 0) {
