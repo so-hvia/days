@@ -77,16 +77,15 @@
             100% { transform: rotate(0deg); } 
         } 
 
-        /* === ОНОВЛЕНІ СТИЛІ ДЛЯ КАРТИНКИ СЕРДЕЧКА === */
+        /* === НАЛАШТУВАННЯ ДЛЯ АНІМАЦІЇ ПОЦІЛУНКІВ === */
         .heart {
             position: absolute;
-            bottom: -60px; /* Починають трохи нижче через розмір картинки */
+            bottom: -80px; /* Сховано глибше через більший розмір картинок */
             user-select: none;
             pointer-events: none;
-            animation: flyAndFade 4s linear forwards;
+            animation: flyAndFade 5s linear forwards; /* Трохи сповільнили політ для плавності */
         }
 
-        /* Стиль безпосередньо для зображення всередині контейнера heart */
         .heart img {
             width: 100%;
             height: auto;
@@ -99,11 +98,11 @@
                 opacity: 0.9; 
             }
             50% {
-                transform: translateY(-50vh) translateX(40px) rotate(25deg);
+                transform: translateY(-50vh) translateX(50px) rotate(20deg);
                 opacity: 0.6; 
             }
             100% {
-                transform: translateY(-105vh) translateX(-40px) rotate(-25deg);
+                transform: translateY(-110vh) translateX(-50px) rotate(-20deg);
                 opacity: 0; 
             }
         }
@@ -175,35 +174,38 @@
         updateTimer(); 
         setInterval(updateTimer, 1000); 
 
-        // Скрипт створення сердечок із використанням PNG картинок
-        function createHearts() { 
-            const numberOfHearts = 45; 
-            for (let i = 0; i < numberOfHearts; i++) { 
-                setTimeout(() => { 
-                    const heart = document.createElement('div'); 
-                    heart.className = 'heart'; 
-                    
-                    /* Замість текстового символу тепер вставляється картинка heart.png */
-                    heart.innerHTML = '<img src="kiss.png" alt="heart">'; 
-                    
-                    heart.style.left = Math.random() * 100 + 'vw'; 
-                    
-                    /* Задаємо випадкову ширину картинки (від 15px до 40px) */
-                    const size = Math.random() * 25 + 15; 
-                    heart.style.width = size + 'px'; 
-                    
-                    const duration = Math.random() * 2 + 3; 
-                    heart.style.animationDuration = duration + 's'; 
-                    document.body.appendChild(heart); 
-                    
-                    setTimeout(() => { 
-                        heart.remove(); 
-                    }, duration * 1000); 
-                }, i * 120); 
-            } 
-        } 
+        // === ОНОВЛЕНА ФУНКЦІЯ ДЛЯ СТВОРЕННЯ ОДНОГО ПОЦІЛУНКУ ===
+        function spawnKiss() {
+            const kiss = document.createElement('div');
+            kiss.className = 'heart';
+            
+            /* Використовуємо файл kiss.png */
+            kiss.innerHTML = '<img src="kiss.png" alt="kiss">'; 
+            
+            // Випадкова точка появи по всій ширині екрана
+            kiss.style.left = Math.random() * 100 + 'vw'; 
+            
+            /* ЗБІЛЬШЕНО РОЗМІР: тепер випадковий розмір від 35px до 65px */
+            const size = Math.random() * 30 + 35; 
+            kiss.style.width = size + 'px'; 
+            
+            // Швидкість польоту від 4 до 6 секунд
+            const duration = Math.random() * 2 + 4; 
+            kiss.style.animationDuration = duration + 's'; 
+            
+            document.body.appendChild(kiss); 
+            
+            // Видалення з коду після розчинення
+            setTimeout(() => { 
+                kiss.remove(); 
+            }, duration * 1000); 
+        }
 
-        window.addEventListener('DOMContentLoaded', createHearts); 
+        // === НЕСКІНЧЕННИЙ ПОТІК ===
+        // Запускаємо генерацію поцілунків кожні 350 мілісекунд
+        window.addEventListener('DOMContentLoaded', () => {
+            setInterval(spawnKiss, 350); 
+        });
     </script> 
 </body> 
 </html>
