@@ -153,35 +153,37 @@
 
             /* Центруємо H1 на телефоні та прибираємо фонову плашку, бо блоки таймера тепер окремо */
             h1 {
-                font-size: 24px; /* Трохи зменшуємо шрифт для мобілок */
+                font-size: 24px; 
                 text-align: center;
-                background: transparent; 
-                padding: 10px;
-                margin-bottom: 15px;
-                display: block;
+                background: #ffffff; 
+                padding: 12px 20px;
+                margin-bottom: 10px;
+                border-radius: 12px; /* Повністю закруглена окрема плашка */
+                display: inline-block;
             }
 
-            /* Перетворюємо таймер на вертикальний стовпчик без спільного білого тла */
+            /* Вертикальний таймер */
             .timer-display {
-                flex-direction: column !important; /* Блоки йдуть строго вертикально */
-                background: transparent; /* Прибираємо спільну довгу плашку */
+                flex-direction: column !important; 
+                background: transparent; 
                 padding: 0;
                 width: 100%;
                 align-items: center;
             }
 
-            /* Створюємо ОКРЕМУ плашку для кожної пари (Цифра + Текст) */
+             /* Окремі плашки для часу */
             .timer-item {
-                background: #ffffff; /* Біле тло для кожної окремої цифри */
-                border-radius: 12px;  /* Гарне закруглення кутів */
-                padding: 12px 20px;   /* Внутрішні відступи */
-                width: 200px;         /* Фіксована ширина кожної плашки */
-                margin: 8px 0 !important; /* Відстань (відступ) між плашками */
-                box-shadow: 0 2px 8px rgba(0,0,0,0.04); /* Легка тінь для об'єму */
+                background: #ffffff; 
+                border-radius: 12px;  
+                padding: 10px 20px;   
+                width: 220px;         
+                margin: 6px 0 !important; /* Невелика відстань між плашками */
+                box-shadow: 0 2px 6px rgba(0,0,0,0.03); 
+                flex-direction: column;
             }
 
             /* Трохи коригуємо розміри шрифтів на телефоні */
-            .timer-num {
+           .timer-num {
                 font-size: 32px;
             }
             .timer-word {
@@ -298,8 +300,21 @@
             setTimeout(() => { kiss.remove(); }, duration * 1000); 
         } 
 
+        // === НАЛАШТУВАННЯ ДИНАМІЧНОЇ ШВИДКОСТІ ДЛЯ КОМП'ЮТЕРІВ ТА ТЕЛЕФОНІВ ===
         window.addEventListener('DOMContentLoaded', () => { 
-            let spawnSpeed = checkAnniversary() ? 80 : 150;
+            // Перевіряємо, чи це мобільний екран (ширина менше 768 пікселів)
+            const isMobile = window.innerWidth <= 768;
+            
+            let spawnSpeed;
+
+            if (checkAnniversary()) {
+                // ШВИДКІСТЬ НА РІЧНИЦЮ:
+                spawnSpeed = isMobile ? 160 : 80; // 160мс для телефонів, 80мс для комп'ютерів
+            } else {
+                // ШВИДКІСТЬ У ЗВИЧАЙНІ ДНІ:
+                spawnSpeed = isMobile ? 320 : 150; // 320мс для телефонів (повільно), 150мс для комп'ютерів (часто)
+            }
+            
             setInterval(spawnKiss, spawnSpeed); 
         }); 
     </script> 
