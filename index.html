@@ -228,18 +228,16 @@
             const now = new Date();
             let currentImg = ""; 
             
-            const isSeptember6 = (now.getMonth() === 8 && now.getDate() === 6);
+            const isSeptember6 = now.getMonth() === 6 && now.getDate() === 28
             const isAfterTime = (now.getHours() > 18 || (now.getHours() === 18 && now.getMinutes() >= 56));
             
             // ЛОГІКА ДЛЯ РІЧНИЦІ (3 святкові картинки вперемішку)
             if (isSeptember6 && isAfterTime) {
                 const randomChoice = Math.random();
                 if (randomChoice < 0.33) {
-                    currentImg = "anniversary1.png";
+                    currentImg = "confetti.png";
                 } else if (randomChoice < 0.66) {
-                    currentImg = "anniversary2.png";
-                } else {
-                    currentImg = "anniversary3.png";
+                    currentImg = "balloon-hearts.png";
                 }
             } 
             // ЛОГІКА ДЛЯ ЗВИЧАЙНИХ ДНІВ (2 різні поцілунки вперемішку)
@@ -269,8 +267,8 @@
 
 
         window.addEventListener('DOMContentLoaded', () => { 
-            const now = new Date();
-            const isSeptember6 = (now.getMonth() === 8 && now.getDate() === 6);
+            const now = new Date(); now.getMonth() === 6 && now.getDate() === 28
+        
             const isAfterTime = (now.getHours() > 18 || (now.getHours() === 18 && now.getMinutes() >= 56));
             
             // Визначаємо швидкість: якщо річниця — 80мс (дуже густо), якщо звичайний день — 150мс
