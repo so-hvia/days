@@ -46,16 +46,24 @@
 
         /* Налаштування вигляду таймера */
         .timer-display {
-            font-size: 28px; 
-            font-weight: 600; /* Товщина Inter 600 */
+            font-size: 32px; /* Збільшили розмір самих цифр */
+            font-family: 'Inter', sans-serif !important;
+            font-weight: 600 !important; 
             color: #9B0116; 
             letter-spacing: 0.5px;
             padding: 15px 25px;
-            background: #ffffff; /* Плашка позаду таймера */
+            background: #ffffff; 
             border-radius: 12px;
             display: inline-block;
-            transition: transform 0.4s ease; /* Плавне повернення у вихідний стан */
+            transition: transform 0.4s ease; 
             cursor: default;
+        }
+
+        .timer-display span {
+            font-size: 20px; /* Зменшений розмір для тексту порівняно з цифрами */
+            font-weight: 600;
+            color: #9B0116;
+            margin-right: 8px; /* Відступ після кожного слова */
         }
 
         /* Ефект погойдування плашки при наведенні (спочатку один край, потім інший) */
@@ -86,6 +94,16 @@
     <script>
         // Дата: 6 вересня 2021 року, 18:05:06
         const startDate = new Date(Date.UTC(2021, 8, 6, 18, 5, 6)); 
+        
+         function getPluralWord(number, one, two, many) {
+            let n = Math.abs(number);
+            n %= 100;
+            if (n >= 5 && n <= 20) return many;
+            n %= 10;
+            if (n === 1) return one;
+            if (n >= 2 && n <= 4) return two;
+            return many;
+        }
 
         function updateTimer() {
             const now = new Date();
@@ -112,7 +130,26 @@
                 months--;
             }
             if (months < 0) { months += 12; years--; }
+            
+       // Отримуємо правильні закінчення для кожного слова
+             let txtYears = getPluralWord(years, "рік", "роки", "років");
+            let txtMonths = getPluralWord(months, "місяць", "місяці", "місяців");
+            let txtDays = getPluralWord(days, "день", "дні", "днів");
+            let txtHours = getPluralWord(hours, "година", "години", "годин");
+            let txtMinutes = getPluralWord(minutes, "хвилина", "хвилини", "хвилин");
+            let txtSeconds = getPluralWord(seconds, "секунда", "секунди", "секунд");
 
+            
+            // Виводимо цифри великими, а слова загортаємо в <span> для зменшення
+            document.getElementById('timer').innerHTML = 
+                `${years}<span> ${txtYears}</span> ` +
+                `${months}<span> ${txtMonths}</span> ` +
+                `${days}<span> ${txtDays}</span> ` +
+                `${hours}<span> ${txtHours}</span> ` +
+                `${minutes}<span> ${txtMinutes}</span> ` +
+                `${seconds}<span> ${txtSeconds}</span>`;
+        }
+            
             // Додали змінну `${seconds}с.` у виведення тексту
             document.getElementById('timer').innerHTML = 
                 `${years}р. ${months}міс. ${days}д. ${hours}год. ${minutes}хв. ${seconds}с.`;
@@ -121,6 +158,35 @@
         // Головне виправлення: тепер таймер оновлюється кожну 1 секунду (1000 мс), тому секунди йдуть в реальному часі
         updateTimer();
         setInterval(updateTimer, 1000); 
+
+  function createHearts() {
+            const numberOfHearts = 45; 
+            
+            for (let i = 0; i < numberOfHearts; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.innerHTML = '❤️'; 
+                    
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    
+                    const size = Math.random() * 20 + 15; 
+                    heart.style.fontSize = size + 'px';
+                    
+                    const duration = Math.random() * 2 + 3; 
+                    heart.style.animationDuration = duration + 's';
+                    
+                    document.body.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        heart.remove();
+                    }, duration * 1000);
+                    
+                }, i * 120); 
+            }
+        }
+        window.addEventListener('DOMContentLoaded', createHearts);
+        
     </script>
 
 </body>
