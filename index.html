@@ -65,6 +65,8 @@
             display: inline-block; 
             transition: transform 0.4s ease; 
             cursor: default; 
+             /* НОВИЙ РЯДОК: Робить ширину всіх цифр однаковою і прибирає здригання */
+            font-variant-numeric: tabular-nums; 
         } 
 
         .timer-display span { 
@@ -237,9 +239,9 @@
             if (isSeptember6 && isAfterTime) {
                 // Випадково обираємо 50/50 між anniversary1.png та anniversary2.png
                 if (Math.random() < 0.5) {
-                    currentImg = "ballons.png";
+                    currentImg = "balloon-hearts.png";
                 } else {
-                    currentImg = "confetti.png";
+                    currentImg = "ballon.png";
                 }
             }
             
