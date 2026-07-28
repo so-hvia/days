@@ -237,11 +237,15 @@
             
             // Якщо настав час річниці
             if (isSeptember6 && isAfterTime) {
-                // Випадково обираємо 50/50 між anniversary1.png та anniversary2.png
-                if (Math.random() < 0.5) {
+                // Випадково обираємо рівну долю між трьома святковими картинками
+                const randomChoice = Math.random();
+                
+                if (randomChoice < 0.33) {
+                    currentImg = "confetti.png";
+                } else if (randomChoice < 0.66) {
                     currentImg = "balloon-hearts.png";
                 } else {
-                    currentImg = "confetti.png";
+                    currentImg = "cat.png"; // ТРЕТЯ КАРТИНКА
                 }
             }
             
