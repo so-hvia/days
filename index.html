@@ -220,15 +220,14 @@
             const trajectoryType = Math.floor(Math.random() * 3); 
             if (trajectoryType === 0) {
                 kiss.className = 'heart fly-straight';
-            } else if (trajectoryType === 1) {
+            } else (trajectoryType === 1) {
                 kiss.className = 'heart fly-left';
-            } else {
-                kiss.className = 'heart fly-right';
             }
             
             // --- ЛОГІКА ВИБОРУ КАРТИНКИ (ЗВИЧАЙНА АБО 2 СВЯТКОВІ) ---
             const now = new Date();
             let currentImg = "kiss.png"; // Картинка для звичайних днів
+            let currentImg = "cat.png"; // Картинка для звичайних днів
             
             // Перевіряємо, чи сьогодні 6 вересня (місяць 8 у JS) і час вже після 18:56
             // const isSeptember6 = (now.getMonth() === 8 && now.getDate() === 6);
