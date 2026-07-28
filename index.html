@@ -45,10 +45,10 @@
             font-size: 32px; 
             font-weight: 500 !important; 
             color: #2A2823; 
-            margin: 0 auto 5px auto; /* ОНОВЛЕНО: Зменшили відступ, щоб підняти таймер */
-            padding: 10px 5px; 
+              margin: 0 auto 0 auto; /* ЗМІНЕНО: Прибрали всі відступи знизу */
+            padding: 10px 5px 0 5px; /* ЗМІНЕНО: Зменшили нижній внутрішній відступ */
             background: #ffffff; 
-            border-radius: 8px; 
+            border-radius: 8px 8px 0 0; /* ЗМІНЕНО: Закруглення тільки зверху */
             display: inline-block; 
         } 
 
@@ -58,10 +58,10 @@
             font-weight: 600 !important; 
             color: #9B0116; 
             letter-spacing: 0.5px; 
-            padding: 10px 25px; /* Зменшили внутрішній вертикальний відступ */
-            margin: 0 auto; /* ВИПРАВЛЕНО: Прибрали помилку з двокрапкою */
+            padding: 0 25px 10px 25px; /* ЗМІНЕНО: Зменшили верхній внутрішній відступ */
+            margin: 0 auto; /* ЗМІНЕНО: Повністю прибрали зовнішні відступи */
             background: #ffffff; 
-            border-radius: 12px; 
+            border-radius: 0 0 12px 12px; /* ЗМІНЕНО: Закруглення тільки знизу */
             display: inline-block; 
             transition: transform 0.4s ease; 
             cursor: default; 
@@ -119,21 +119,21 @@
         /* 1. Прямо вгору (з легким елегантним поворотом наприкінці) */
         @keyframes straightMove { 
             0% { transform: translateY(0) rotate(0deg); opacity: 0.9; } 
-            70% { opacity: 0.3; } 
+            80% { opacity: 0.3; } 
             100% { transform: translateY(-115vh) rotate(15deg); opacity: 0; } 
         } 
 
         /* 2. Рівномірна діагональ ЛІВОРУЧ */
         @keyframes leftMove { 
             0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.9; } 
-            70% { opacity: 0.3; } 
+            80% { opacity: 0.3; } 
             100% { transform: translateY(-115vh) translateX(-15vw) rotate(-35deg); opacity: 0; } 
         } 
 
         /* 3. Рівномірна діагональ ПРАВОРУЧ */
         @keyframes rightMove { 
             0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.9; } 
-            70% { opacity: 0.3; } 
+            80% { opacity: 0.3; } 
             100% { transform: translateY(-115vh) translateX(15vw) rotate(35deg); opacity: 0; } 
         } 
        </style> 
@@ -225,10 +225,10 @@
             
             kiss.innerHTML = '<img src="kiss.png" alt="kiss">'; 
             
-            // ОНОВЛЕНО: Розширили зону появи від 2% до 100% ширини екрана для рівномірності
-            kiss.style.left = (Math.random() * 98 + 2) + 'vw'; 
+            // ОНОВЛЕНО: Розширили зону появи від 2% до 98% ширини екрана для рівномірності
+            kiss.style.left = (Math.random() * 96 + 2) + 'vw'; 
             
-            const size = Math.random() * 30 + 35; 
+            const size = Math.random() * 30 + 40; 
             kiss.style.width = size + 'px'; 
             
             const duration = Math.random() * 2 + 4; 
