@@ -112,29 +112,31 @@
         .fly-right {
             animation: rightMove 5s linear forwards;
         }
+        .fly-right {
+            animation: rightMove 5s linear forwards;
+        }
 
-        /* 1. Траєкторія: Прямо вгору із затуханням */
+        /* 1. Прямо вгору (з легким елегантним поворотом наприкінці) */
         @keyframes straightMove { 
             0% { transform: translateY(0) rotate(0deg); opacity: 0.9; } 
             70% { opacity: 0.3; } 
-            100% { transform: translateY(-115vh) rotate(0deg); opacity: 0; } 
+            100% { transform: translateY(-115vh) rotate(15deg); opacity: 0; } 
         } 
 
-        /* 2. Траєкторія: Діагональ ліворуч з обертанням та затуханням */
+        /* 2. Рівномірна діагональ ЛІВОРУЧ */
         @keyframes leftMove { 
             0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.9; } 
             70% { opacity: 0.3; } 
-            100% { transform: translateY(-115vh) translateX(-100px) rotate(-30deg); opacity: 0; } 
+            100% { transform: translateY(-115vh) translateX(-15vw) rotate(-35deg); opacity: 0; } 
         } 
 
-        /* 3. Траєкторія: Діагональ праворуч з обертанням та затуханням */
+        /* 3. Рівномірна діагональ ПРАВОРУЧ */
         @keyframes rightMove { 
             0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.9; } 
             70% { opacity: 0.3; } 
-            100% { transform: translateY(-115vh) translateX(100px) rotate(30deg); opacity: 0; } 
+            100% { transform: translateY(-115vh) translateX(15vw) rotate(35deg); opacity: 0; } 
         } 
-
-    </style> 
+       </style> 
 </head> 
 <body> 
 
@@ -211,7 +213,7 @@
           function spawnKiss() { 
             const kiss = document.createElement('div'); 
             
-            // Випадково обираємо один із трьох CSS-класів руху
+            // Випадковий розподіл напрямків: 0 — прямо, 1 — ліворуч, 2 — праворуч
             const trajectoryType = Math.floor(Math.random() * 3); 
             if (trajectoryType === 0) {
                 kiss.className = 'heart fly-straight';
@@ -222,7 +224,9 @@
             }
             
             kiss.innerHTML = '<img src="kiss.png" alt="kiss">'; 
-            kiss.style.left = (Math.random() * 80 + 10) + 'vw'; 
+            
+            // ОНОВЛЕНО: Розширили зону появи від 2% до 98% ширини екрана для рівномірності
+            kiss.style.left = (Math.random() * 96 + 2) + 'vw'; 
             
             const size = Math.random() * 30 + 35; 
             kiss.style.width = size + 'px'; 
