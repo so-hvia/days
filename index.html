@@ -99,9 +99,8 @@
 
         .fly-right {
             animation: rightMove 5s linear forwards;
-        }
+        } 
 
-        /* Анімації польоту: тримають колір до 85% */
         @keyframes straightMove { 
             0% { transform: translateY(0) rotate(0deg); opacity: 0.9; } 
             85% { opacity: 0.8; } 
@@ -210,10 +209,12 @@
             if (isAnniversaryDay) { 
                 const randomChoice = Math.random(); 
                 if (randomChoice < 0.33) { 
-                    currentImg = "confetti.png"; 
+                    currentImg = "anniversary1.png"; 
                 } else if (randomChoice < 0.66) { 
+                    currentImg = "confetti.png"; 
+                } else { 
                     currentImg = "balloon-hearts.png"; 
-                }
+                } 
             } else { 
                 if (Math.random() < 0.5) { 
                     currentImg = "kiss.png"; 
@@ -240,7 +241,6 @@
 
         window.addEventListener('DOMContentLoaded', () => { 
             const now = new Date(); 
-            // ТИМЧАСОВА ПЕРЕВІРКА НА СЬОГОДНІ (28 липня)
             const isAnniversaryDay = (now.getMonth() === 6 && now.getDate() === 28); 
             
             let spawnSpeed = isAnniversaryDay ? 80 : 150; 
@@ -249,4 +249,3 @@
     </script> 
 </body> 
 </html>
-
