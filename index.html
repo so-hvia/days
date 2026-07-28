@@ -101,21 +101,39 @@
             height: auto; 
             display: block; 
         } 
+        .fly-straight {
+            animation: straightMove 5s linear forwards;
+        }
 
-        /* Поцілунки плавно згасають під час усього польоту */ 
-        @keyframes flyAndFade { 
-            0% { 
-                transform: translateY(0); 
-                opacity: 0.9; 
-            } 
-            70% { 
-                opacity: 0.3; 
-            } 
-            100% { 
-                transform: translateY(-115vh); 
-                opacity: 0; 
-            } 
+        .fly-left {
+            animation: leftMove 5s linear forwards;
+        }
+
+        .fly-right {
+            animation: rightMove 5s linear forwards;
+        }
+
+        /* 1. Траєкторія: Прямо вгору із затуханням */
+        @keyframes straightMove { 
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.9; } 
+            70% { opacity: 0.3; } 
+            100% { transform: translateY(-115vh) rotate(0deg); opacity: 0; } 
         } 
+
+        /* 2. Траєкторія: Діагональ ліворуч з обертанням та затуханням */
+        @keyframes leftMove { 
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.9; } 
+            70% { opacity: 0.3; } 
+            100% { transform: translateY(-115vh) translateX(-100px) rotate(-30deg); opacity: 0; } 
+        } 
+
+        /* 3. Траєкторія: Діагональ праворуч з обертанням та затуханням */
+        @keyframes rightMove { 
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.9; } 
+            70% { opacity: 0.3; } 
+            100% { transform: translateY(-115vh) translateX(100px) rotate(30deg); opacity: 0; } 
+        } 
+
     </style> 
 </head> 
 <body> 
@@ -190,10 +208,19 @@
         updateTimer(); 
         setInterval(updateTimer, 1000); 
 
-        // === ОНОВЛЕНЕ РОЗПОДІЛЕННЯ ТРАЄКТОРІЙ === 
-        function spawnKiss() { 
+          function spawnKiss() { 
             const kiss = document.createElement('div'); 
-            kiss.className = 'heart'; 
+            
+            // Випадково обираємо один із трьох CSS-класів руху
+            const trajectoryType = Math.floor(Math.random() * 3); 
+            if (trajectoryType === 0) {
+                kiss.className = 'heart fly-straight';
+            } else if (trajectoryType === 1) {
+                kiss.className = 'heart fly-left';
+            } else {
+                kiss.className = 'heart fly-right';
+            }
+            
             kiss.innerHTML = '<img src="kiss.png" alt="kiss">'; 
             kiss.style.left = (Math.random() * 80 + 10) + 'vw'; 
             
@@ -202,27 +229,6 @@
             
             const duration = Math.random() * 2 + 4; 
             kiss.style.animationDuration = duration + 's'; 
-
-            const trajectoryType = Math.floor(Math.random() * 3); 
-            let driftX = '0px'; 
-            let rotateDeg = '0deg'; 
-
-            if (trajectoryType === 1) { 
-                driftX = (Math.random() * -80 - 20) + 'px'; 
-                rotateDeg = (Math.random() * -30 - 5) + 'deg'; 
-            } else if (trajectoryType === 2) { 
-                driftX = (Math.random() * 80 + 20) + 'px'; 
-                rotateDeg = (Math.random() * 30 + 5) + 'deg'; 
-            } 
-
-            kiss.animate([ 
-                { transform: 'translateX(0) rotate(0deg)' }, 
-                { transform: `translateX(${driftX}) rotate(${rotateDeg})` } 
-            ], { 
-                duration: duration * 1000, 
-                easing: 'linear', 
-                fill: 'forwards' 
-            }); 
 
             document.body.appendChild(kiss); 
             
