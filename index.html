@@ -133,6 +133,61 @@
             85% { opacity: 0.8; } 
             100% { transform: translateY(-115vh) translateX(15vw) rotate(35deg); opacity: 0; } 
         } 
+
+        /* === НАЛАШТУВАННЯ ДЛЯ МОБІЛЬНИХ ТЕЛЕФОНІВ (екран менше 768px) === */
+        @media (max-width: 768px) {
+            /* Примусове центрування всього контенту на екрані телефона */
+            .container {
+                align-items: center !important;
+                justify-content: center !important;
+                padding: 10px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            /* Зменшуємо максимальну ширину головного фото, щоб воно красиво виглядало на смартфонах */
+            .center-image {
+                max-width: 280px;
+                margin-bottom: 15px;
+            }
+
+            /* Центруємо H1 на телефоні та прибираємо фонову плашку, бо блоки таймера тепер окремо */
+            h1 {
+                font-size: 24px; /* Трохи зменшуємо шрифт для мобілок */
+                text-align: center;
+                background: transparent; 
+                padding: 10px;
+                margin-bottom: 15px;
+                display: block;
+            }
+
+            /* Перетворюємо таймер на вертикальний стовпчик без спільного білого тла */
+            .timer-display {
+                flex-direction: column !important; /* Блоки йдуть строго вертикально */
+                background: transparent; /* Прибираємо спільну довгу плашку */
+                padding: 0;
+                width: 100%;
+                align-items: center;
+            }
+
+            /* Створюємо ОКРЕМУ плашку для кожної пари (Цифра + Текст) */
+            .timer-item {
+                background: #ffffff; /* Біле тло для кожної окремої цифри */
+                border-radius: 12px;  /* Гарне закруглення кутів */
+                padding: 12px 20px;   /* Внутрішні відступи */
+                width: 200px;         /* Фіксована ширина кожної плашки */
+                margin: 8px 0 !important; /* Відстань (відступ) між плашками */
+                box-shadow: 0 2px 8px rgba(0,0,0,0.04); /* Легка тінь для об'єму */
+            }
+
+            /* Трохи коригуємо розміри шрифтів на телефоні */
+            .timer-num {
+                font-size: 32px;
+            }
+            .timer-word {
+                font-size: 18px;
+            }
+        }
     </style> 
 </head> 
 <body> 
