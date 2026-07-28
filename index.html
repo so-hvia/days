@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <title>Скільки днів я люблю Сашулю</title> 
 
-    <!-- Завантажуємо Manrope з альтернативним надійним методом --> 
+    <!-- Підключення шрифту Manrope з Google Fonts --> 
     <link rel="preconnect" href="https://googleapis.com"> 
     <link rel="preconnect" href="https://gstatic.com" crossorigin> 
     <link href="https://googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet"> 
@@ -40,6 +40,7 @@
             margin: 0 auto 20px auto; 
         } 
 
+        /* Заголовок H1 з білою плашкою */ 
         h1 { 
             font-size: 32px; 
             font-weight: 500 !important; 
@@ -51,6 +52,7 @@
             display: inline-block; 
         } 
 
+        /* Налаштування вигляду таймера */ 
         .timer-display { 
             font-size: 36px; 
             font-weight: 600 !important; 
@@ -73,6 +75,7 @@
             margin-right: 8px; 
         } 
 
+        /* Стилі для анімації поцілунків */ 
         .heart { 
             position: absolute; 
             bottom: -80px; 
@@ -90,6 +93,7 @@
         .fly-left { animation: leftMove 5s linear forwards; } 
         .fly-right { animation: rightMove 5s linear forwards; } 
 
+        /* Анімації польоту з утриманням кольору до 85% */
         @keyframes straightMove { 
             0% { transform: translateY(0) rotate(0deg); opacity: 0.9; } 
             85% { opacity: 0.8; } 
@@ -177,6 +181,14 @@
         updateTimer(); 
         setInterval(updateTimer, 1000); 
 
+        // Розумна перевірка чи зараз річниця (6 вересня після 18:56)
+        function checkAnniversary() {
+            const now = new Date();
+            const isSeptember6 = (now.getMonth() === 8 && now.getDate() === 6);
+            const isAfterTime = (now.getHours() > 18 || (now.getHours() === 18 && now.getMinutes() >= 56));
+            return isSeptember6 && isAfterTime;
+        }
+
         function spawnKiss() { 
             const kiss = document.createElement('div'); 
             
@@ -186,13 +198,17 @@
             else { kiss.className = 'heart fly-right'; } 
             
             let currentImg = ""; 
-            const randomChoice = Math.random(); 
             
-            // Тестово крутимо ТІЛЬКИ річницю
-            if (randomChoice < 0.33) { currentImg = "confetti.png"; } 
-            else (randomChoice < 0.66) { currentImg = "balloon-hearts.png"; }
+            // Якщо річниця — пускаємо конфеті та кульки
+            if (checkAnniversary()) {
+                currentImg = (Math.random() < 0.5) ? "confetti.png" : "balloon-hearts.png";
+            } 
+            // Якщо звичайний день — пускаємо поцілунки та котиків
+            else {
+                currentImg = (Math.random() < 0.5) ? "kiss.png" : "cat.png";
+            }
             
-            kiss.innerHTML = `<img src="${currentImg}" alt="anniversary">`; 
+            kiss.innerHTML = `<img src="${currentImg}" alt="kiss">`; 
             kiss.style.left = (Math.random() * 96 + 2) + 'vw'; 
             
             const size = Math.random() * 30 + 35; 
@@ -206,9 +222,10 @@
             setTimeout(() => { kiss.remove(); }, duration * 1000); 
         } 
 
+        // Динамічний запуск: швидкість автоматично підлаштовується під дату
         window.addEventListener('DOMContentLoaded', () => { 
-            // Швидкість 80мс для тесту
-            setInterval(spawnKiss, 80); 
+            let spawnSpeed = checkAnniversary() ? 80 : 150;
+            setInterval(spawnKiss, spawnSpeed); 
         }); 
     </script> 
 </body> 
