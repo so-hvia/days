@@ -229,16 +229,17 @@
             let currentImg = "kiss.png"; // Картинка для звичайних днів
             
             // Перевіряємо, чи сьогодні 6 вересня (місяць 8 у JS) і час вже після 18:56
-            const isSeptember6 = (now.getMonth() === 8 && now.getDate() === 6);
+            // const isSeptember6 = (now.getMonth() === 8 && now.getDate() === 6);
+            const isSeptember6 = (now.getMonth() === 6 && now.getDate() === 28);
             const isAfterTime = (now.getHours() > 18 || (now.getHours() === 18 && now.getMinutes() >= 56));
             
             // Якщо настав час річниці
             if (isSeptember6 && isAfterTime) {
                 // Випадково обираємо 50/50 між anniversary1.png та anniversary2.png
                 if (Math.random() < 0.5) {
-                    currentImg = "anniversary1.png";
+                    currentImg = "ballons.png";
                 } else {
-                    currentImg = "anniversary2.png";
+                    currentImg = "confetti.png";
                 }
             }
             
