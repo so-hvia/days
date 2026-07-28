@@ -135,18 +135,25 @@
         } 
 
         /* === НАЛАШТУВАННЯ ДЛЯ МОБІЛЬНИХ ТЕЛЕФОНІВ (екран менше 768px) === */
+       /* === НАЛАШТУВАННЯ ДЛЯ МОБІЛЬНИХ ТЕЛЕФОНІВ === */
         @media (max-width: 768px) {
-            /* ЗМІНЕНО: Дозволяємо сторінці вільно скролитися по вертикалі без обмежень */
+            html, body {
                 display: block !important; 
                 overflow-x: hidden !important; 
                 overflow-y: auto !important;   
-                padding-top: 30px;
-                padding-bottom: 50px;
                 height: auto !important;
                 min-height: 100vh;
+                /* Робить скрол на смартфонах м'яким та плавним без заїдань */
+                -webkit-overflow-scrolling: touch; 
             }
-        .container {
-                /* ЗМІНЕНО: Центруємо вміст класичним текстовим методом */
+
+            body {
+                padding-top: 50px; /* ЗБІЛЬШЕНО: Великий відступ згори для фото */
+                padding-bottom: 60px;
+                background-color: #ffffff !important;
+            }
+
+            .container { 
                 display: block !important;
                 text-align: center !important;
                 padding: 10px;
@@ -154,48 +161,46 @@
                 box-sizing: border-box;
                 margin: 0 auto;
             }
-             
-            .center-image {
+
+            .center-image { 
                 max-width: 260px; 
-                margin: 0 auto 20px auto; /* Центруємо фото по горизонталі */
-            }
+                margin: 0 auto 25px auto; /* Центруємо фото та робимо відступ знизу */
+            } 
 
-
-            /* Центруємо H1 на телефоні та прибираємо фонову плашку, бо блоки таймера тепер окремо */
-            h1 {
-               font-size: 24px; 
+            h1 { 
+                font-size: 24px; 
                 text-align: center;
-                background: #ffffff; 
+                background: #ffffff !important; /* Примусово біле тло */
                 padding: 12px 20px;
-                margin: 0 auto 15px auto; /* Центруємо плашку H1 */
+                margin: 0 auto 15px auto; 
                 border-radius: 12px; 
                 display: inline-block;
-            }
+                box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            } 
 
-            /* Вертикальний таймер */
-            .timer-display {
+            .timer-display { 
                 flex-direction: column !important; 
-                background: transparent; 
+                background: transparent !important; /* Прозорий загальний контейнер */
                 padding: 0;
                 width: 100%;
                 align-items: center;
-                display: flex !important; /* Утримуємо стовпчик всередині блоку */
-            }
-            }
+                display: flex !important; 
+            } 
 
-             /* Окремі плашки для часу */
+            /* ПОВЕРНУТО: Окремі білі плашки для часу */
             .timer-item {
-                background: #ffffff; 
-                border-radius: 12px;  
-                padding: 10px 20px;   
-                width: 220px;         
-                margin: 8px auto !important; /* Центруємо кожну плашку часу */
-                box-shadow: 0 2px 6px rgba(0,0,0,0.03); 
-                flex-direction: column;
+                background: #ffffff !important; /* Примусово повертаємо біле тло */
+                border-radius: 12px !important;  
+                padding: 12px 20px !important;   
+                width: 220px !important;         
+                margin: 10px auto !important; /* Збільшений відступ між плашками */
+                box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important; /* Легка гарна тінь */
+                display: flex !important;
+                flex-direction: column !important;
+                box-sizing: border-box;
             }
 
-            /* Трохи коригуємо розміри шрифтів на телефоні */
-           .timer-num {
+            .timer-num {
                 font-size: 32px;
             }
             .timer-word {
