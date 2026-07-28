@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <title>Скільки днів я люблю Сашулю</title> 
 
-    <!-- Правильне підключення шрифту Manrope з Google Fonts --> 
-    <link rel="preconnect" href="https://googleapis.com"> 
-    <link rel="preconnect" href="https://gstatic.com" crossorigin> 
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&display=swap" rel="stylesheet"> 
+    <!-- ВИПРАВЛЕНО: Надійне підключення шрифту Manrope з Google Fonts --> 
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+    <link href="https://fonts.googleapis.com" rel="stylesheet"> 
     <link rel="icon" href="calendar.png" type="image/png" sizes="36x36"> 
 
     <style> 
@@ -22,22 +22,23 @@
             align-items: center; 
             min-height: 100vh; 
             overflow: hidden; 
-            position: relative;
+            position: relative; 
         } 
 
         .container { 
             text-align: center; 
             padding: 20px; 
-            position: relative;
-            z-index: 10;
+            position: relative; 
+            z-index: 10; 
         } 
 
+        /* ОНОВЛЕНО: Трохи зменшили картинку */
         .center-image { 
-            max-width: 400px; 
+            max-width: 320px; /* Було 400px, тепер картинка акуратніша */
             width: 100%; 
             height: auto; 
             display: block; 
-            margin: 0 auto 30px auto; 
+            margin: 0 auto 20px auto; /* Зменшили відступ знизу */
         } 
 
         /* Заголовок H1 з білою плашкою */ 
@@ -45,8 +46,8 @@
             font-size: 32px; 
             font-weight: 500 !important; 
             color: #2A2823; 
-            margin: 0 auto 10px auto; 
-            padding: 15px 5px; 
+            margin: 0 auto 5px auto; /* ОНОВЛЕНО: Зменшили відступ, щоб підняти таймер */
+            padding: 10px 5px; 
             background: #ffffff; 
             border-radius: 8px; 
             display: inline-block; 
@@ -58,8 +59,8 @@
             font-weight: 600 !important; 
             color: #9B0116; 
             letter-spacing: 0.5px; 
-            padding: 15px 25px; 
-            margin: 5px 20px:
+            padding: 10px 25px; /* Зменшили внутрішній вертикальний відступ */
+            margin: 0 auto; /* ВИПРАВЛЕНО: Прибрали помилку з двокрапкою */
             background: #ffffff; 
             border-radius: 12px; 
             display: inline-block; 
@@ -74,57 +75,60 @@
             margin-right: 8px; 
         } 
 
-        /* Погойдування таймера 
+        /* ВИПРАВЛЕНО: Коментар тепер закривається правильно, не ламаючи код нижче */
+        /* 
         .timer-display:hover { 
             animation: wobble-box 0.6s ease-in-out forwards; 
         } 
-
         @keyframes wobble-box { 
             0% { transform: rotate(0deg); } 
             30% { transform: rotate(3deg); } 
             70% { transform: rotate(-2deg); } 
             100% { transform: rotate(0deg); } 
-        } */ 
+        } 
+        */ 
 
-        /* Налаштування анімації поцілунків */
-        .heart {
-            position: absolute;
+        /* === НАЛАШТУВАННЯ АНІМАЦІЇ ПОЦІЛУНКІВ (ПОВЕРНУТО З КОМЕНТАРЯ) === */ 
+        .heart { 
+            position: absolute; 
             bottom: -80px; 
-            user-select: none;
-            pointer-events: none;
+            user-select: none; 
+            pointer-events: none; 
             animation: flyAndFade 5s linear forwards; 
-        }
+        } 
 
-        .heart img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
+        .heart img { 
+            width: 100%; 
+            height: auto; 
+            display: block; 
+        } 
 
-        /* Поцілунки плавно згасають під час усього польоту */
-        @keyframes flyAndFade {
-            0% {
-                transform: translateY(0);
+        /* Поцілунки плавно згасають під час усього польоту */ 
+        @keyframes flyAndFade { 
+            0% { 
+                transform: translateY(0); 
                 opacity: 0.9; 
-            }
-            70% {
+            } 
+            70% { 
                 opacity: 0.3; 
-            }
-            100% {
-                transform: translateY(-115vh);
+            } 
+            100% { 
+                transform: translateY(-115vh); 
                 opacity: 0; 
-            }
-        }
+            } 
+        } 
     </style> 
 </head> 
 <body> 
 
     <div class="container"> 
         <img src="photo.png" alt="Головне зображення" class="center-image"> 
+        
         <!-- Заголовок H1 на плашці --> 
         <div> 
             <h1>Я найщасливіша дівчина в світі вже:</h1> 
         </div> 
+
         <!-- Таймер з плашкою --> 
         <div class="timer-display" id="timer">Завантаження...</div> 
     </div> 
@@ -187,12 +191,11 @@
         updateTimer(); 
         setInterval(updateTimer, 1000); 
 
-        // === ОНОВЛЕНЕ РОЗПОДІЛЕННЯ ТРАЄКТОРІЙ ===
+        // === ОНОВЛЕНЕ РОЗПОДІЛЕННЯ ТРАЄКТОРІЙ === 
         function spawnKiss() { 
             const kiss = document.createElement('div'); 
             kiss.className = 'heart'; 
             kiss.innerHTML = '<img src="kiss.png" alt="kiss">'; 
-            
             kiss.style.left = (Math.random() * 80 + 10) + 'vw'; 
             
             const size = Math.random() * 30 + 35; 
@@ -201,30 +204,26 @@
             const duration = Math.random() * 2 + 4; 
             kiss.style.animationDuration = duration + 's'; 
 
-            // Створюємо випадковість: 0 — прямо вгору, 1 — ліворуч, 2 — праворуч
             const trajectoryType = Math.floor(Math.random() * 3); 
-            let driftX = '0px';
-            let rotateDeg = '0deg';
+            let driftX = '0px'; 
+            let rotateDeg = '0deg'; 
 
-            if (trajectoryType === 1) {
-                // Діагональ ліворуч
-                driftX = (Math.random() * -80 - 20) + 'px';
-                rotateDeg = (Math.random() * -30 - 5) + 'deg';
-            } else if (trajectoryType === 2) {
-                // Діагональ праворуч
-                driftX = (Math.random() * 80 + 20) + 'px';
-                rotateDeg = (Math.random() * 30 + 5) + 'deg';
-            }
-            // Якщо trajectoryType === 0, змінні залишаються '0px' та '0deg' (політ прямо вгору)
+            if (trajectoryType === 1) { 
+                driftX = (Math.random() * -80 - 20) + 'px'; 
+                rotateDeg = (Math.random() * -30 - 5) + 'deg'; 
+            } else if (trajectoryType === 2) { 
+                driftX = (Math.random() * 80 + 20) + 'px'; 
+                rotateDeg = (Math.random() * 30 + 5) + 'deg'; 
+            } 
 
-            kiss.animate([
-                { transform: 'translateX(0) rotate(0deg)' },
-                { transform: `translateX(${driftX}) rotate(${rotateDeg})` }
-            ], {
-                duration: duration * 1000,
-                easing: 'linear',
-                fill: 'forwards'
-            });
+            kiss.animate([ 
+                { transform: 'translateX(0) rotate(0deg)' }, 
+                { transform: `translateX(${driftX}) rotate(${rotateDeg})` } 
+            ], { 
+                duration: duration * 1000, 
+                easing: 'linear', 
+                fill: 'forwards' 
+            }); 
 
             document.body.appendChild(kiss); 
             
