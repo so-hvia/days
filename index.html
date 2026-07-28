@@ -37,7 +37,7 @@
             width: 100%; 
             height: auto; 
             display: block; 
-            margin: 0 auto 24px auto; /* Зменшили відступ знизу */
+            margin: 0 auto 20px auto; /* Зменшили відступ знизу */
         } 
 
         /* Заголовок H1 з білою плашкою */ 
@@ -46,7 +46,7 @@
             font-weight: 500 !important; 
             color: #2A2823; 
               margin: 0 auto 0 auto; /* ЗМІНЕНО: Прибрали всі відступи знизу */
-            padding: 10px 7px 10 7px; /* ЗМІНЕНО: Зменшили нижній внутрішній відступ */
+            padding: 10px 5px 0 5px; /* ЗМІНЕНО: Зменшили нижній внутрішній відступ */
             background: #ffffff; 
             border-radius: 8px 8px 0 0; /* ЗМІНЕНО: Закруглення тільки зверху */
             display: inline-block; 
@@ -58,7 +58,7 @@
             font-weight: 600 !important; 
             color: #9B0116; 
             letter-spacing: 0.5px; 
-            padding: 10px 7px 10px 7px; /* ЗМІНЕНО: Зменшили верхній внутрішній відступ */
+            padding: 0 25px 10px 25px; /* ЗМІНЕНО: Зменшили верхній внутрішній відступ */
             margin: 0 auto; /* ЗМІНЕНО: Повністю прибрали зовнішні відступи */
             background: #ffffff; 
             border-radius: 0 0 12px 12px; /* ЗМІНЕНО: Закруглення тільки знизу */
@@ -210,7 +210,8 @@
         updateTimer(); 
         setInterval(updateTimer, 1000); 
 
-          function spawnKiss() { 
+                // === ФУНКЦІЯ СТВОРЕННЯ ПОЦІЛУНКІВ ЧЕРЕЗ КЛАСИ З ДВОМА PNG НА РІЧНИЦЮ === 
+        function spawnKiss() { 
             const kiss = document.createElement('div'); 
             
             // Випадковий розподіл напрямків: 0 — прямо, 1 — ліворуч, 2 — праворуч
@@ -223,12 +224,30 @@
                 kiss.className = 'heart fly-right';
             }
             
-            kiss.innerHTML = '<img src="kiss.png" alt="kiss">'; 
+            // --- ЛОГІКА ВИБОРУ КАРТИНКИ (ЗВИЧАЙНА АБО 2 СВЯТКОВІ) ---
+            const now = new Date();
+            let currentImg = "kiss.png"; // Картинка для звичайних днів
             
-            // ОНОВЛЕНО: Розширили зону появи від 2% до 98% ширини екрана для рівномірності
+            // Перевіряємо, чи сьогодні 6 вересня (місяць 8 у JS) і час вже після 18:56
+            const isSeptember6 = (now.getMonth() === 8 && now.getDate() === 6);
+            const isAfterTime = (now.getHours() > 18 || (now.getHours() === 18 && now.getMinutes() >= 56));
+            
+            // Якщо настав час річниці
+            if (isSeptember6 && isAfterTime) {
+                // Випадково обираємо 50/50 між anniversary1.png та anniversary2.png
+                if (Math.random() < 0.5) {
+                    currentImg = "anniversary1.png";
+                } else {
+                    currentImg = "anniversary2.png";
+                }
+            }
+            
+            kiss.innerHTML = `<img src="${currentImg}" alt="kiss">`; 
+            
+            // Розширена зона появи від 2% до 98% ширини екрана
             kiss.style.left = (Math.random() * 96 + 2) + 'vw'; 
             
-            const size = Math.random() * 30 + 40; 
+            const size = Math.random() * 30 + 35; 
             kiss.style.width = size + 'px'; 
             
             const duration = Math.random() * 2 + 4; 
@@ -240,6 +259,7 @@
                 kiss.remove(); 
             }, duration * 1000); 
         } 
+
 
         window.addEventListener('DOMContentLoaded', () => { 
             setInterval(spawnKiss, 150); 
