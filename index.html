@@ -4,57 +4,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Скільки днів я люблю свого мужчіну</title>
+    
+    <!-- Підключаємо шрифт Inter з Google Fonts -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Inter:wght@600;700&display=swap" rel="stylesheet">
+
     <style>
-        /* CSS для розташування елементів по центру */
         body {
             margin: 0;
             padding: 0;
-            background-color: #ffffff; /* Чисто біле тло */
-            font-family: Arial, sans-serif;
+            background-color: #ffffff; 
+            font-family: 'Inter', sans-serif; /* Застосовуємо новий шрифт */
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh; /* Розвертає вміст на всю висоту екрана */
+            min-height: 100vh; 
         }
 
         .container {
-            text-align: center; /* Центрує картинку та текст всередині */
+            text-align: center; 
             padding: 20px;
         }
 
-        /* Налаштування картинки посередині */
-       .center-image {
-            max-width: 400px; /* Максимальна ширина картинки */
+        .center-image {
+            max-width: 400px; 
             width: 100%;
             height: auto;
             display: block;
-            margin: 0 auto 30px auto; /* Центрує картинку та робить відступ знизу */
+            margin: 0 auto 30px auto; 
+        }
+
+        /* Заголовок H1 над таймером */
+        h1 {
+            font-size: 24px;
+            font-weight: 700; /* Товщина Inter 700 */
+            color: #333333; /* Темно-сірий колір */
+            margin: 0 0 15px 0;
         }
 
         /* Налаштування вигляду таймера */
         .timer-display {
-            font-size: 28px; /* Розмір шрифту */
-            font-weight: bold;
-            color: #9B0116; /* Червоний колір для цифр */
+            font-size: 28px; 
+            font-weight: 600; /* Товщина Inter 600 */
+            color: #9B0116; 
             letter-spacing: 0.5px;
+            padding: 15px 25px;
+            background: #ffffff; /* Плашка позаду таймера */
+            border-radius: 12px;
+            display: inline-block;
+            transition: transform 0.4s ease; /* Плавне повернення у вихідний стан */
+            cursor: default;
+        }
+
+        /* Ефект погойдування плашки при наведенні (спочатку один край, потім інший) */
+        .timer-display:hover {
+            animation: wobble-box 0.6s ease-in-out forwards;
+        }
+
+        @keyframes wobble-box {
+            0% { transform: rotate(0deg); }
+            30% { transform: rotate(3deg); }   /* Нахил в один бік */
+            70% { transform: rotate(-2deg); } /* Потім нахил в інший бік */
+            100% { transform: rotate(0deg); }  /* Повернення до центру */
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- Замініть image.jpg на посилання або назву вашої картинки -->
         <img src="photo.png" alt="Головне зображення" class="center-image">
         
-        <!-- Сюди скрипт виводитиме час -->
+        <!-- Заголовок H1 -->
+        <h1>Ми разом уже:</h1>
+        
+        <!-- Таймер з плашкою -->
         <div class="timer-display" id="timer">Завантаження...</div>
     </div>
 
     <script>
-        // === НАЛАШТУВАННЯ ДАТИ ===
-        // Вкажіть дату, ВІД якої рахувати час (Рік, Місяць - 1, День, Година, Хвилина)
-        // УВАГА: Місяці в JavaScript рахуються з 0 до 11 (0 - січень, 1 - лютий, ..., 6 - липень тощо)
-        // Наприклад, 15 липня 2024 року о 12:00 запишеться як: Date.UTC(2024, 6, 15, 12, 0, 0)
+        // Дата: 6 вересня 2021 року, 18:05:06
         const startDate = new Date(Date.UTC(2021, 8, 6, 18, 5, 6)); 
 
         function updateTimer() {
@@ -66,7 +95,6 @@
                 return;
             }
 
-            // Розрахунок років, місяців, днів, годин, хвилин та секунд
             let years = now.getFullYear() - startDate.getFullYear();
             let months = now.getMonth() - startDate.getMonth();
             let days = now.getDate() - startDate.getDate();
@@ -74,8 +102,7 @@
             let minutes = now.getMinutes() - startDate.getMinutes();
             let seconds = now.getSeconds() - startDate.getSeconds();
 
-            // Коригування негативних значень через різну кількість днів у місяцях
-             if (seconds < 0) { seconds += 60; minutes--; }
+            if (seconds < 0) { seconds += 60; minutes--; }
             if (minutes < 0) { minutes += 60; hours--; }
             if (hours < 0) { hours += 24; days--; }
             if (days < 0) {
@@ -85,14 +112,14 @@
             }
             if (months < 0) { months += 12; years--; }
 
-            // Виведення результату на екран
+            // Додали змінну `${seconds}с.` у виведення тексту
             document.getElementById('timer').innerHTML = 
-                `${years}р. ${months}міс. ${days}д. ${hours}год. ${minutes}хв.`;
+                `${years}р. ${months}міс. ${days}д. ${hours}год. ${minutes}хв. ${seconds}с.`;
         }
 
-        // Запуск таймера щохвилини
+        // Головне виправлення: тепер таймер оновлюється кожну 1 секунду (1000 мс), тому секунди йдуть в реальному часі
         updateTimer();
-        setInterval(updateTimer, 60000); 
+        setInterval(updateTimer, 1000); 
     </script>
 
 </body>
