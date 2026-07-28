@@ -136,29 +136,39 @@
 
         /* === НАЛАШТУВАННЯ ДЛЯ МОБІЛЬНИХ ТЕЛЕФОНІВ (екран менше 768px) === */
         @media (max-width: 768px) {
-            /* Примусове центрування всього контенту на екрані телефона */
-            .container {
-                align-items: center !important;
-                justify-content: center !important;
+            /* ЗМІНЕНО: Дозволяємо сторінці вільно скролитися по вертикалі без обмежень */
+                display: block !important; 
+                overflow-x: hidden !important; 
+                overflow-y: auto !important;   
+                padding-top: 30px;
+                padding-bottom: 50px;
+                height: auto !important;
+                min-height: 100vh;
+            }
+        .container {
+                /* ЗМІНЕНО: Центруємо вміст класичним текстовим методом */
+                display: block !important;
+                text-align: center !important;
                 padding: 10px;
                 width: 100%;
                 box-sizing: border-box;
+                margin: 0 auto;
+            }
+             
+            .center-image {
+                max-width: 260px; 
+                margin: 0 auto 20px auto; /* Центруємо фото по горизонталі */
             }
 
-            /* Зменшуємо максимальну ширину головного фото, щоб воно красиво виглядало на смартфонах */
-            .center-image {
-                max-width: 280px;
-                margin-bottom: 15px;
-            }
 
             /* Центруємо H1 на телефоні та прибираємо фонову плашку, бо блоки таймера тепер окремо */
             h1 {
-                font-size: 24px; 
+               font-size: 24px; 
                 text-align: center;
                 background: #ffffff; 
                 padding: 12px 20px;
-                margin-bottom: 10px;
-                border-radius: 12px; /* Повністю закруглена окрема плашка */
+                margin: 0 auto 15px auto; /* Центруємо плашку H1 */
+                border-radius: 12px; 
                 display: inline-block;
             }
 
@@ -169,6 +179,8 @@
                 padding: 0;
                 width: 100%;
                 align-items: center;
+                display: flex !important; /* Утримуємо стовпчик всередині блоку */
+            }
             }
 
              /* Окремі плашки для часу */
@@ -177,7 +189,7 @@
                 border-radius: 12px;  
                 padding: 10px 20px;   
                 width: 220px;         
-                margin: 6px 0 !important; /* Невелика відстань між плашками */
+                margin: 8px auto !important; /* Центруємо кожну плашку часу */
                 box-shadow: 0 2px 6px rgba(0,0,0,0.03); 
                 flex-direction: column;
             }
