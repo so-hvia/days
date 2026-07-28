@@ -189,9 +189,8 @@
             const randomChoice = Math.random(); 
             
             // Тестово крутимо ТІЛЬКИ річницю
-            if (randomChoice < 0.33) { currentImg = "anniversary1.png"; } 
-            else if (randomChoice < 0.66) { currentImg = "anniversary2.png"; } 
-            else { currentImg = "anniversary3.png"; } 
+            if (randomChoice < 0.33) { currentImg = "confetti.png"; } 
+            else (randomChoice < 0.66) { currentImg = "balloon-hearts.png"; }
             
             kiss.innerHTML = `<img src="${currentImg}" alt="anniversary">`; 
             kiss.style.left = (Math.random() * 96 + 2) + 'vw'; 
