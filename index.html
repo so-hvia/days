@@ -46,7 +46,7 @@
             font-weight: 500 !important; 
             color: #2A2823; 
             margin: 0 auto 0 auto; 
-            padding: 10px 5px 10px 5px; 
+            padding: 5px 10px 5px 10px; 
             background: #ffffff; 
             border-radius: 8px 8px 0 0; 
             display: inline-block; 
@@ -58,7 +58,7 @@
             font-weight: 600 !important; 
             color: #9B0116; 
             letter-spacing: 0.5px; 
-            padding: 5 25px 5px 25px; 
+            padding: 5px 25px 5px 25px; 
             margin: 0 auto; 
             background: #ffffff; 
             border-radius: 0 0 12px 12px; 
@@ -75,6 +75,20 @@
             color: #9B0116; 
             margin-right: 8px; 
         } 
+         /* Робимо так, щоб блоки з часом шикувалися в один ряд */
+        .timer-display {
+            display: inline-flex !important;
+            justify-content: center;
+            align-items: baseline;
+            flex-wrap: wrap; /* Якщо екран смартфона малий, блоки акуратно перенесуться */
+        }
+
+         /* Задаємо кожному блоку (цифра + слово) фіксовану ширину, щоб нічого не здригалося */
+        .timer-item {
+            display: inline-block;
+            width: 140px; /* Завдяки цьому простір для слів зафіксовано */
+            text-align: center; /* Центруємо текст всередині кожного блоку */
+        }
 
         /* Стилі для анімації поцілунків */ 
         .heart { 
@@ -172,12 +186,12 @@
 
            // Обертаємо кожну пару (цифра + слово) в контейнер <div class="timer-item">
             document.getElementById('timer').innerHTML = 
-                `${years}<span> ${txtYears}</span> ` + 
-                `${months}<span> ${txtMonths}</span> ` + 
-                `${days}<span> ${txtDays}</span> ` + 
-                `${hours}<span> ${txtHours}</span> ` + 
-                `${minutes}<span> ${txtMinutes}</span> ` + 
-                `${seconds}<span> ${txtSeconds}</span>`; 
+                `<div class="timer-item">${years}<span> ${txtYears}</span></div>` + 
+                `<div class="timer-item">${months}<span> ${txtMonths}</span></div>` + 
+                `<div class="timer-item">${days}<span> ${txtDays}</span></div>` + 
+                `<div class="timer-item">${hours}<span> ${txtHours}</span></div>` + 
+                `<div class="timer-item">${minutes}<span> ${txtMinutes}</span></div>` + 
+                `<div class="timer-item">${seconds}<span> ${txtSeconds}</span></div>`;
         } 
 
         updateTimer(); 
