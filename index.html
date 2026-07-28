@@ -212,45 +212,46 @@
         updateTimer(); 
         setInterval(updateTimer, 1000); 
 
-                // === ФУНКЦІЯ СТВОРЕННЯ ПОЦІЛУНКІВ ЧЕРЕЗ КЛАСИ З ДВОМА PNG НА РІЧНИЦЮ === 
+            // === ОНОВЛЕНА ФУНКЦІЯ СТВОРЕННЯ ПОЦІЛУНКІВ (2 PNG ДЛЯ ЗВИЧАЙНИХ ДНІВ / 3 PNG ДЛЯ РІЧНИЦІ) === 
         function spawnKiss() { 
             const kiss = document.createElement('div'); 
             
-            // Випадковий розподіл напрямків: 0 — прямо, 1 — ліворуч, 2 — праворуч
             const trajectoryType = Math.floor(Math.random() * 3); 
             if (trajectoryType === 0) {
                 kiss.className = 'heart fly-straight';
-            } else (trajectoryType === 1) {
+            } else if (trajectoryType === 1) {
                 kiss.className = 'heart fly-left';
+            } else {
+                kiss.className = 'heart fly-right';
             }
             
-            // --- ЛОГІКА ВИБОРУ КАРТИНКИ (ЗВИЧАЙНА АБО 2 СВЯТКОВІ) ---
             const now = new Date();
-            let currentImg = "kiss.png"; // Картинка для звичайних днів
-            let currentImg = "cat.png"; // Картинка для звичайних днів
+            let currentImg = ""; 
             
-            // Перевіряємо, чи сьогодні 6 вересня (місяць 8 у JS) і час вже після 18:56
-            // const isSeptember6 = (now.getMonth() === 8 && now.getDate() === 6);
-            const isSeptember6 = (now.getMonth() === 6 && now.getDate() === 28);
+            const isSeptember6 = (now.getMonth() === 8 && now.getDate() === 6);
             const isAfterTime = (now.getHours() > 18 || (now.getHours() === 18 && now.getMinutes() >= 56));
             
-            // Якщо настав час річниці
+            // ЛОГІКА ДЛЯ РІЧНИЦІ (3 святкові картинки вперемішку)
             if (isSeptember6 && isAfterTime) {
-                // Випадково обираємо рівну долю між трьома святковими картинками
                 const randomChoice = Math.random();
-                
                 if (randomChoice < 0.33) {
-                    currentImg = "confetti.png";
+                    currentImg = "anniversary1.png";
                 } else if (randomChoice < 0.66) {
-                    currentImg = "balloon-hearts.png";
+                    currentImg = "anniversary2.png";
                 } else {
-                    currentImg = "cat.png"; // ТРЕТЯ КАРТИНКА
+                    currentImg = "anniversary3.png";
+                }
+            } 
+            // ЛОГІКА ДЛЯ ЗВИЧАЙНИХ ДНІВ (2 різні поцілунки вперемішку)
+            else {
+                if (Math.random() < 0.5) {
+                    currentImg = "kiss.png"; // Перша звичайна картинка
+                } else {
+                    currentImg = "cat.png"; // Друга звичайна картинка
                 }
             }
             
             kiss.innerHTML = `<img src="${currentImg}" alt="kiss">`; 
-            
-            // Розширена зона появи від 2% до 98% ширини екрана
             kiss.style.left = (Math.random() * 96 + 2) + 'vw'; 
             
             const size = Math.random() * 30 + 35; 
@@ -268,7 +269,14 @@
 
 
         window.addEventListener('DOMContentLoaded', () => { 
-            setInterval(spawnKiss, 150); 
+            const now = new Date();
+            const isSeptember6 = (now.getMonth() === 8 && now.getDate() === 6);
+            const isAfterTime = (now.getHours() > 18 || (now.getHours() === 18 && now.getMinutes() >= 56));
+            
+            // Визначаємо швидкість: якщо річниця — 80мс (дуже густо), якщо звичайний день — 150мс
+            let spawnSpeed = (isSeptember6 && isAfterTime) ? 80 : 150;
+            
+            setInterval(spawnKiss, spawnSpeed); 
         }); 
     </script> 
 </body> 
