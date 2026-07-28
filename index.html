@@ -41,7 +41,7 @@
             height: auto; 
             display: block; 
             margin: 0 auto 20px auto; 
-            border-radius: 12px 12px 12px 12px;
+            border-radius: 16px 16px 16px 16px;
         } 
 
         /* Заголовок H1 з білою плашкою */ 
@@ -152,7 +152,9 @@
             .center-image { 
                 max-width: 260px !important; 
                 margin: 0 auto 0 auto !important; 
-                 border-radius: 12px 12px 0 0; 
+                border-radius: 12px 12px 0 0; 
+                position: relative;
+                z-index: 1; /* необов'язково, але гарантує результат */
             } 
             h1 { 
                 font-size: 24px !important; 
