@@ -137,7 +137,7 @@
 
         /* === НАЛАШТУВАННЯ ДЛЯ МОБІЛЬНИХ ТЕЛЕФОНІВ === */
         @media (max-width: 768px) {
-            body {
+             body {
                 align-items: flex-start !important; 
                 padding-top: 50px !important; 
                 padding-bottom: 50px !important;
@@ -167,26 +167,29 @@
                 box-shadow: 0 2px 8px rgba(0,0,0,0.02) !important;
             } 
             .timer-display { 
-                flex-direction: column !important; 
+                flex-direction: row !important; 
+                flex-wrap: wrap !important;
                 background: transparent !important; 
                 padding: 0 !important;
                 width: 100% !important;
-                align-items: center !important;
+                justify-content: center !important;
+                align-items: stretch !important;
                 display: flex !important; 
             } 
             .timer-item {
                 background: #ffffff !important; 
                 border-radius: 12px !important;  
-                padding: 12px 20px !important;   
-                width: 220px !important;         
-                margin: 10px auto !important; 
+                padding: 10px 8px !important;   
+                width: calc(50% - 20px) !important;
+                max-width: 150px !important;
+                margin: 6px 8px !important; 
                 box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important; 
                 display: flex !important;
                 flex-direction: column !important;
                 box-sizing: border-box !important;
             }
-            .timer-num { font-size: 32px !important; }
-            .timer-word { font-size: 18px !important; }
+            .timer-num { font-size: 26px !important; }
+            .timer-word { font-size: 15px !important; }
         }
     </style> 
 </head> 
