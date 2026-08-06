@@ -113,26 +113,110 @@
             display: block; 
         } 
 
-        .fly-straight { animation: straightMove 5s linear forwards; } 
-        .fly-left { animation: leftMove 5s linear forwards; } 
-        .fly-right { animation: rightMove 5s linear forwards; } 
+        .fly-straight-1 { animation: straightMove1 5s linear forwards; } 
+        .fly-left-1 { animation: leftMove1 5s linear forwards; } 
+        .fly-right-1 { animation: rightMove1 5s linear forwards; } 
+        .fly-straight-2 { animation: straightMove2 5s linear forwards; } 
+        .fly-left-2 { animation: leftMove2 5s linear forwards; } 
+        .fly-right-2 { animation: rightMove2 5s linear forwards; } 
+        .fly-straight-3 { animation: straightMove3 5s linear forwards; } 
+        .fly-left-3 { animation: leftMove3 5s linear forwards; } 
+        .fly-right-3 { animation: rightMove3 5s linear forwards; } 
+        .fly-straight-nofade { animation: straightMoveNoFade 5s linear forwards; }
+        .fly-left-nofade { animation: leftMoveNoFade 5s linear forwards; }
+        .fly-right-nofade { animation: rightMoveNoFade 5s linear forwards; }
 
-        @keyframes straightMove { 
+        /* Три варіанти розчинення (коротший / середній / довший), щоб не всі елементи 
+           згасали однаково. Усі завершують розчинення ДО межі overflow:hidden (~87% шляху) */
+        @keyframes straightMove1 { 
             0% { transform: translateY(0) rotate(0deg); opacity: 0.9; } 
-            85% { opacity: 0.8; } 
+            15% { opacity: 0.88; } 
+            32% { opacity: 0.7; } 
+            50% { opacity: 0.3; } 
+            65% { opacity: 0; } 
             100% { transform: translateY(-115vh) rotate(15deg); opacity: 0; } 
         } 
-
-        @keyframes leftMove { 
+        @keyframes leftMove1 { 
             0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.9; } 
-            85% { opacity: 0.8; } 
+            15% { opacity: 0.88; } 
+            32% { opacity: 0.7; } 
+            50% { opacity: 0.3; } 
+            65% { opacity: 0; } 
             100% { transform: translateY(-115vh) translateX(-15vw) rotate(-35deg); opacity: 0; } 
         } 
-
-        @keyframes rightMove { 
+        @keyframes rightMove1 { 
             0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.9; } 
-            85% { opacity: 0.8; } 
+            15% { opacity: 0.88; } 
+            32% { opacity: 0.7; } 
+            50% { opacity: 0.3; } 
+            65% { opacity: 0; } 
             100% { transform: translateY(-115vh) translateX(15vw) rotate(35deg); opacity: 0; } 
+        } 
+
+        @keyframes straightMove2 { 
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.9; } 
+            15% { opacity: 0.88; } 
+            38% { opacity: 0.7; } 
+            58% { opacity: 0.3; } 
+            75% { opacity: 0; } 
+            100% { transform: translateY(-115vh) rotate(15deg); opacity: 0; } 
+        } 
+        @keyframes leftMove2 { 
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.9; } 
+            15% { opacity: 0.88; } 
+            38% { opacity: 0.7; } 
+            58% { opacity: 0.3; } 
+            75% { opacity: 0; } 
+            100% { transform: translateY(-115vh) translateX(-15vw) rotate(-35deg); opacity: 0; } 
+        } 
+        @keyframes rightMove2 { 
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.9; } 
+            15% { opacity: 0.88; } 
+            38% { opacity: 0.7; } 
+            58% { opacity: 0.3; } 
+            75% { opacity: 0; } 
+            100% { transform: translateY(-115vh) translateX(15vw) rotate(35deg); opacity: 0; } 
+        } 
+
+        @keyframes straightMove3 { 
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.9; } 
+            15% { opacity: 0.88; } 
+            45% { opacity: 0.7; } 
+            68% { opacity: 0.3; } 
+            85% { opacity: 0; } 
+            100% { transform: translateY(-115vh) rotate(15deg); opacity: 0; } 
+        } 
+        @keyframes leftMove3 { 
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.9; } 
+            15% { opacity: 0.88; } 
+            45% { opacity: 0.7; } 
+            68% { opacity: 0.3; } 
+            85% { opacity: 0; } 
+            100% { transform: translateY(-115vh) translateX(-15vw) rotate(-35deg); opacity: 0; } 
+        } 
+        @keyframes rightMove3 { 
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.9; } 
+            15% { opacity: 0.88; } 
+            45% { opacity: 0.7; } 
+            68% { opacity: 0.3; } 
+            85% { opacity: 0; } 
+            100% { transform: translateY(-115vh) translateX(15vw) rotate(35deg); opacity: 0; } 
+        } 
+
+        /* Рідкісний варіант: летить далі й не розчиняється, зникає обрізанням за краєм екрана */
+        @keyframes straightMoveNoFade { 
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.9; } 
+            100% { transform: translateY(-115vh) rotate(15deg); opacity: 0.85; } 
+        } 
+
+        @keyframes leftMoveNoFade { 
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.9; } 
+            100% { transform: translateY(-115vh) translateX(-15vw) rotate(-35deg); opacity: 0.85; } 
+        } 
+
+        @keyframes rightMoveNoFade { 
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.9; } 
+            100% { transform: translateY(-115vh) translateX(15vw) rotate(35deg); opacity: 0.85; } 
         } 
 
         /* === НАЛАШТУВАННЯ ДЛЯ МОБІЛЬНИХ ТЕЛЕФОНІВ === */
@@ -286,16 +370,17 @@
             const kiss = document.createElement('div'); 
             
             const trajectoryType = Math.floor(Math.random() * 3); 
-            if (trajectoryType === 0) { kiss.className = 'heart fly-straight'; } 
-            else if (trajectoryType === 1) { kiss.className = 'heart fly-left'; } 
-            else { kiss.className = 'heart fly-right'; } 
+            const baseClass = (trajectoryType === 0) ? 'straight' : (trajectoryType === 1) ? 'left' : 'right'; 
+            const isNoFade = Math.random() < 0.33; // ~33% шанс пролетіти далі, не розчиняючись 
+            const fadeTier = Math.floor(Math.random() * 3) + 1; // 1 = швидше, 2 = середнє, 3 = довше розчинення 
+            kiss.className = isNoFade ? `heart fly-${baseClass}-nofade` : `heart fly-${baseClass}-${fadeTier}`; 
             
             let currentImg = ""; 
             
             if (checkAnniversary()) {
                 currentImg = (Math.random() < 0.5) ? "confetti.png" : "balloon-hearts.png";
             } else {
-                currentImg = (Math.random() < 0.5) ? "kiss.png" : "cat.png";
+                currentImg = (Math.random() < 0.75) ? "kiss.png" : "cat.png"; // ~3:1 kiss.png до cat.png
             }
             
             kiss.innerHTML = `<img src="${currentImg}" alt="kiss">`; 
@@ -326,7 +411,7 @@
                 spawnSpeed = isMobile ? 160 : 80; // 160мс для телефонів, 80мс для комп'ютерів
             } else {
                 // ШВИДКІСТЬ У ЗВИЧАЙНІ ДНІ:
-                spawnSpeed = isMobile ? 320 : 185; // 320мс для телефонів (повільно), 150мс для комп'ютерів (часто)
+                spawnSpeed = isMobile ? 320 : 150; // 320мс для телефонів (повільно), 150мс для комп'ютерів (трохи швидше)
             }
             
             setInterval(spawnKiss, spawnSpeed); 
