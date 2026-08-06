@@ -126,80 +126,80 @@
         .fly-left-nofade { animation: leftMoveNoFade 5s linear forwards; }
         .fly-right-nofade { animation: rightMoveNoFade 5s linear forwards; }
 
-        /* Три варіанти розчинення (коротший / середній / довший), щоб не всі елементи 
-           згасали однаково. Усі завершують розчинення ДО межі overflow:hidden (~87% шляху) */
+        /* Три варіанти розчинення (завершуються на 85% / 90% / 98% шляху), 
+           щоб не всі елементи згасали однаково */
         @keyframes straightMove1 { 
             0% { transform: translateY(0) rotate(0deg); opacity: 0.9; } 
             15% { opacity: 0.88; } 
-            32% { opacity: 0.7; } 
-            50% { opacity: 0.3; } 
-            65% { opacity: 0; } 
+            40% { opacity: 0.7; } 
+            65% { opacity: 0.3; } 
+            85% { opacity: 0; } 
             100% { transform: translateY(-115vh) rotate(15deg); opacity: 0; } 
         } 
         @keyframes leftMove1 { 
             0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.9; } 
             15% { opacity: 0.88; } 
-            32% { opacity: 0.7; } 
-            50% { opacity: 0.3; } 
-            65% { opacity: 0; } 
+            40% { opacity: 0.7; } 
+            65% { opacity: 0.3; } 
+            85% { opacity: 0; } 
             100% { transform: translateY(-115vh) translateX(-15vw) rotate(-35deg); opacity: 0; } 
         } 
         @keyframes rightMove1 { 
             0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.9; } 
             15% { opacity: 0.88; } 
-            32% { opacity: 0.7; } 
-            50% { opacity: 0.3; } 
-            65% { opacity: 0; } 
+            40% { opacity: 0.7; } 
+            65% { opacity: 0.3; } 
+            85% { opacity: 0; } 
             100% { transform: translateY(-115vh) translateX(15vw) rotate(35deg); opacity: 0; } 
         } 
 
         @keyframes straightMove2 { 
             0% { transform: translateY(0) rotate(0deg); opacity: 0.9; } 
             15% { opacity: 0.88; } 
-            38% { opacity: 0.7; } 
-            58% { opacity: 0.3; } 
-            75% { opacity: 0; } 
+            41% { opacity: 0.7; } 
+            69% { opacity: 0.3; } 
+            90% { opacity: 0; } 
             100% { transform: translateY(-115vh) rotate(15deg); opacity: 0; } 
         } 
         @keyframes leftMove2 { 
             0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.9; } 
             15% { opacity: 0.88; } 
-            38% { opacity: 0.7; } 
-            58% { opacity: 0.3; } 
-            75% { opacity: 0; } 
+            41% { opacity: 0.7; } 
+            69% { opacity: 0.3; } 
+            90% { opacity: 0; } 
             100% { transform: translateY(-115vh) translateX(-15vw) rotate(-35deg); opacity: 0; } 
         } 
         @keyframes rightMove2 { 
             0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.9; } 
             15% { opacity: 0.88; } 
-            38% { opacity: 0.7; } 
-            58% { opacity: 0.3; } 
-            75% { opacity: 0; } 
+            41% { opacity: 0.7; } 
+            69% { opacity: 0.3; } 
+            90% { opacity: 0; } 
             100% { transform: translateY(-115vh) translateX(15vw) rotate(35deg); opacity: 0; } 
         } 
 
         @keyframes straightMove3 { 
             0% { transform: translateY(0) rotate(0deg); opacity: 0.9; } 
             15% { opacity: 0.88; } 
-            45% { opacity: 0.7; } 
-            68% { opacity: 0.3; } 
-            85% { opacity: 0; } 
+            44% { opacity: 0.7; } 
+            75% { opacity: 0.3; } 
+            98% { opacity: 0; } 
             100% { transform: translateY(-115vh) rotate(15deg); opacity: 0; } 
         } 
         @keyframes leftMove3 { 
             0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.9; } 
             15% { opacity: 0.88; } 
-            45% { opacity: 0.7; } 
-            68% { opacity: 0.3; } 
-            85% { opacity: 0; } 
+            44% { opacity: 0.7; } 
+            75% { opacity: 0.3; } 
+            98% { opacity: 0; } 
             100% { transform: translateY(-115vh) translateX(-15vw) rotate(-35deg); opacity: 0; } 
         } 
         @keyframes rightMove3 { 
             0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.9; } 
             15% { opacity: 0.88; } 
-            45% { opacity: 0.7; } 
-            68% { opacity: 0.3; } 
-            85% { opacity: 0; } 
+            44% { opacity: 0.7; } 
+            75% { opacity: 0.3; } 
+            98% { opacity: 0; } 
             100% { transform: translateY(-115vh) translateX(15vw) rotate(35deg); opacity: 0; } 
         } 
 
@@ -372,7 +372,7 @@
             const trajectoryType = Math.floor(Math.random() * 3); 
             const baseClass = (trajectoryType === 0) ? 'straight' : (trajectoryType === 1) ? 'left' : 'right'; 
             const isNoFade = Math.random() < 0.33; // ~33% шанс пролетіти далі, не розчиняючись 
-            const fadeTier = Math.floor(Math.random() * 3) + 1; // 1 = швидше, 2 = середнє, 3 = довше розчинення 
+            const fadeTier = Math.floor(Math.random() * 3) + 1; // 1 = зникає на 85%, 2 = на 90%, 3 = на 98% шляху 
             kiss.className = isNoFade ? `heart fly-${baseClass}-nofade` : `heart fly-${baseClass}-${fadeTier}`; 
             
             let currentImg = ""; 
