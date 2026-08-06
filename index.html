@@ -129,7 +129,8 @@
         /* Три варіанти розчинення — усі лишаються непрозорими, поки не досягнуть верхньої 
            третини екрана, і розчиняються тільки там (завершення на 85% / 90% / 98% шляху) */
         @keyframes straightMove1 { 
-            0% { transform: translateY(0) rotate(0deg); opacity: 0.9; } 
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; } 
+            8% { opacity: 0.9; } 
             55% { opacity: 0.9; } 
             65% { opacity: 0.7; } 
             75% { opacity: 0.3; } 
@@ -137,7 +138,8 @@
             100% { transform: translateY(-115vh) rotate(15deg); opacity: 0; } 
         } 
         @keyframes leftMove1 { 
-            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.9; } 
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; } 
+            8% { opacity: 0.9; } 
             55% { opacity: 0.9; } 
             65% { opacity: 0.7; } 
             75% { opacity: 0.3; } 
@@ -145,7 +147,8 @@
             100% { transform: translateY(-115vh) translateX(-15vw) rotate(-35deg); opacity: 0; } 
         } 
         @keyframes rightMove1 { 
-            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.9; } 
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; } 
+            8% { opacity: 0.9; } 
             55% { opacity: 0.9; } 
             65% { opacity: 0.7; } 
             75% { opacity: 0.3; } 
@@ -154,7 +157,8 @@
         } 
 
         @keyframes straightMove2 { 
-            0% { transform: translateY(0) rotate(0deg); opacity: 0.9; } 
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; } 
+            8% { opacity: 0.9; } 
             55% { opacity: 0.9; } 
             68% { opacity: 0.7; } 
             80% { opacity: 0.3; } 
@@ -162,7 +166,8 @@
             100% { transform: translateY(-115vh) rotate(15deg); opacity: 0; } 
         } 
         @keyframes leftMove2 { 
-            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.9; } 
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; } 
+            8% { opacity: 0.9; } 
             55% { opacity: 0.9; } 
             68% { opacity: 0.7; } 
             80% { opacity: 0.3; } 
@@ -170,7 +175,8 @@
             100% { transform: translateY(-115vh) translateX(-15vw) rotate(-35deg); opacity: 0; } 
         } 
         @keyframes rightMove2 { 
-            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.9; } 
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; } 
+            8% { opacity: 0.9; } 
             55% { opacity: 0.9; } 
             68% { opacity: 0.7; } 
             80% { opacity: 0.3; } 
@@ -179,7 +185,8 @@
         } 
 
         @keyframes straightMove3 { 
-            0% { transform: translateY(0) rotate(0deg); opacity: 0.9; } 
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; } 
+            8% { opacity: 0.9; } 
             55% { opacity: 0.9; } 
             72% { opacity: 0.7; } 
             85% { opacity: 0.3; } 
@@ -187,7 +194,8 @@
             100% { transform: translateY(-115vh) rotate(15deg); opacity: 0; } 
         } 
         @keyframes leftMove3 { 
-            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.9; } 
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; } 
+            8% { opacity: 0.9; } 
             55% { opacity: 0.9; } 
             72% { opacity: 0.7; } 
             85% { opacity: 0.3; } 
@@ -195,7 +203,8 @@
             100% { transform: translateY(-115vh) translateX(-15vw) rotate(-35deg); opacity: 0; } 
         } 
         @keyframes rightMove3 { 
-            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.9; } 
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; } 
+            8% { opacity: 0.9; } 
             55% { opacity: 0.9; } 
             72% { opacity: 0.7; } 
             85% { opacity: 0.3; } 
@@ -205,17 +214,20 @@
 
         /* Рідкісний варіант: летить далі й не розчиняється, зникає обрізанням за краєм екрана */
         @keyframes straightMoveNoFade { 
-            0% { transform: translateY(0) rotate(0deg); opacity: 0.9; } 
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; } 
+            8% { opacity: 0.9; } 
             100% { transform: translateY(-115vh) rotate(15deg); opacity: 0.85; } 
         } 
 
         @keyframes leftMoveNoFade { 
-            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.9; } 
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; } 
+            8% { opacity: 0.9; } 
             100% { transform: translateY(-115vh) translateX(-15vw) rotate(-35deg); opacity: 0.85; } 
         } 
 
         @keyframes rightMoveNoFade { 
-            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.9; } 
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; } 
+            8% { opacity: 0.9; } 
             100% { transform: translateY(-115vh) translateX(15vw) rotate(35deg); opacity: 0.85; } 
         } 
 
@@ -360,6 +372,13 @@
         setInterval(updateTimer, 1000); 
 
         function checkAnniversary() {
+            // Тестовий режим: додай ?test=anniversary в адресний рядок, щоб примусово 
+            // побачити річницю, або ?test=normal — щоб примусово побачити звичайний день. 
+            // Без цього параметра все працює як завжди, за реальною датою.
+            const testParam = new URLSearchParams(window.location.search).get('test');
+            if (testParam === 'anniversary') return true;
+            if (testParam === 'normal') return false;
+
             const now = new Date();
             const isSeptember6 = (now.getMonth() === 8 && now.getDate() === 6);
             const isAfterTime = (now.getHours() > 18 || (now.getHours() === 18 && now.getMinutes() >= 56));
@@ -380,7 +399,7 @@
             if (checkAnniversary()) {
                 currentImg = (Math.random() < 0.5) ? "confetti.png" : "balloon-hearts.png";
             } else {
-                currentImg = (Math.random() < 0.75) ? "kiss.png" : "cat.png"; // ~3:1 kiss.png до cat.png
+                currentImg = (Math.random() < 0.5) ? "kiss.png" : "cat.png"; // 1:1
             }
             
             kiss.innerHTML = `<img src="${currentImg}" alt="kiss">`; 
